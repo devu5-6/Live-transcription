@@ -63,7 +63,7 @@ function createWindow() {
     minHeight: 580,
     backgroundColor: "#0a0c10",
     title: "Live Call Transcription",
-    autoHideMenuBar: true,
+    autoHideMenuBar: true, // Hide default File/Edit/View menu strip
     webPreferences: {
       preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
