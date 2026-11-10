@@ -76,7 +76,19 @@ export default function App() {
   const [copiedLineId, setCopiedLineId] = useState(null);
   const [isScrolledToBottom, setIsScrolledToBottom] = useState(true);
 
-  const resources = useRef([]);
+  const searchInputRef = useRef(null);
+
+  // Global keyboard shortcuts (Ctrl+K or Cmd+K to focus search)
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
   const scrollContainerRef = useRef(null);
   const lastLevelUpdateRef = useRef({ microphone: 0, system: 0 });
   const timerIntervalRef = useRef(null);
@@ -577,8 +589,9 @@ export default function App() {
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
             <input
+              ref={searchInputRef}
               type="text"
-              placeholder="Search transcript..."
+              placeholder="Search transcript (Ctrl+K)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
