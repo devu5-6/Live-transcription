@@ -23,5 +23,6 @@
   },
   "overrides": {
     "rollup": "npm:@rollup/wasm-node@^4.68.2"
-  }
+  },
+  "description": "Real-time dual-channel meeting and call transcription with Deepgram Nova-3"
 }
